@@ -54,7 +54,6 @@ export default {
   },
     computed: {
     jobDatas: function () {
-      console.log(this.datas);
       return [...this.datas].filter(data =>
         this.tagsList.every(e =>
           [data.role, data.level, ...data.languages, ...data.tools].includes(e)
