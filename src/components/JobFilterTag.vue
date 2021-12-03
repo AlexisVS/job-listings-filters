@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-6 items-center group cursor-pointer">
+  <div class="flex h-6 items-center group cursor-pointer" @click="removeDataTag">
     <p
       class="px-2 py-1.5 h-full m-0 rounded-l-md bg-teal-100 font-bold text-teal-600 text-xs flex justify-center items-center"
     >{{ text }}</p>
@@ -13,7 +13,10 @@
 
 <script>
 export default {
-  props: ['text']
+  props: {
+    text: {type: String},
+    removeDataTag: {type: Function},
+  }
 }
 </script>
 

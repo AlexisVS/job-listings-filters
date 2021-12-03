@@ -5,7 +5,7 @@
     <!-- Color Line -->
     <div class="w-1.5 h-28 bg-white group-hover:bg-teal-500 rounded-l-md"></div>
 
-    <img :src="data.logo" class="mx-8" alt />
+    <img :src="require('@/assets/'+data.logo)" class="mx-8" alt />
     <div class="w-full flex justify-between items-center">
       <!-- Image profile -->
       <!-- Post -->
@@ -33,7 +33,7 @@
     <!-- Tags -->
     <div class="flex items-center space-x-3 mr-10">
       <!-- Tag item -->
-      <JobListTag v-for="text in getTags" :key="text" :text="text" @tag="manageTags" />
+      <JobListTag v-for="text in getTags" :key="text" :text="text" @tag="$emit('tagsList', text)" />
     </div>
   </div>
 </template>
@@ -45,27 +45,13 @@ export default {
   components: { JobListTag },
   data () {
     return {
-      selectedTags: [],
       bonjour: null,
     }
-  },
-  methods: {
-    // permet de faie un tableau contenant tous les tags
-    manageTags (tag) {
-      if (this.selectedTags.every(e => e != tag)) {
-        this.selectedTags = [...this.selectedTags, tag];
-      }
-      else if (this.selectedTags.every(e => e !== tag) == true) {
-        this.selectedTags = [...this.selectedTags].splice([...this.selectedTags].indexOf(tag), 1);
-        console.log([...this.selectedTags].splice([...this.selectedTags].indexOf(tag), 1));
-      }
-      this.$emit('tagsList', [...this.selectedTags, tag])
-    },
   },
   computed: {
     // Recupère en un seul tableau tous les tags
     getTags () {
-      return [this.data.company, this.data.role, this.data.level, ...this.data.languages, ...this.data.tools]
+      return [this.data.role, this.data.level, ...this.data.languages, ...this.data.tools]
     }
   }
 }
