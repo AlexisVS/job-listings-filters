@@ -2,8 +2,8 @@
   <div id="app">
     <div class="container">
       <!-- Ajouter props pour tag et creze la logique -->
-      <JobFilter /> 
-      <JobList v-for="data in datas" :key="data.company" :data="data" />
+      <JobFilter :tags="tagsList" /> 
+      <JobList v-for="data in datas" :key="data.company" :data="data" @tagsList="dataTagsList" />
     </div>
   </div>
 </template>
@@ -18,9 +18,16 @@ export default {
     data () {
       return {
         datas: data,
+        selectedTags: [],
+        tagsList: [],
       }
     },
-    components: { JobFilter, JobList }
+    components: { JobFilter, JobList },
+    methods: {
+      dataTagsList (data) {
+        this.tagsList = data;
+      }
+    }
 }
 </script>
 
